@@ -1,0 +1,67 @@
+{% extends "base_user.html" %}
+{% block main %}
+<header>
+  <!-- Background image -->
+  <div
+    class="text-center bg-image"
+    style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+      height: 400px;">
+    <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3"style="overflow: visible;">U bent outgelogd</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</header>
+<div class="row" style="padding:8rem 0rem 4rem 10rem;">
+<div class="line"></div>
+  <div class="col-lg-6">
+    <div class="section-title">
+      <h2 style="overflow: visible;">U bent succesvol uitgelogd</h2>
+      <p>Bedankt voor het gebruik van onze service.</p>
+    </div>
+  </div>
+</div>
+<!-------------------------- strat test example loop card ------------------------------>
+
+<section  style="margin-bottom: 10rem;">
+  <!-- ... (your existing section code) ... -->
+  <div class="col bg-light text-center p-5 ml-5" style="max-width:1800px; justify-content: center; align-items: center; overflow: visible;">
+    <!-- body card -->
+    <div class="logout-container">
+        <h1>U bent succesvol uitgelogd</h1>
+        <p>Bedankt voor het gebruik van onze service.</p>
+        <!-- Je kunt hier nog meer informatie of instructies toevoegen als dat nodig is -->
+    </div>
+    <!-- end body card -->
+  </div>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="col bg-light p-5">
+      <!-- Card -->
+      <div class="card card-image"
+       style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.webp);">
+       <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+       <!-- Content -->
+         <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+         <div>
+         <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing Events</h5>
+         <h3 class="card-title pt-2"><strong> Amsterdam Light Festival</strong></h3>
+         <p>Ieder jaar worden er door de stad evenementen georganiseerd die ons allen weer even een geheel maken. Events die verspreid door de stad, in de 
+          gezamenlijkheid worden georganiseerd. Of we nou samen dansen op ADE of onze ogen uitkijken bij Amsterdam Light Festival, we doen het allemaal samen.</p>
+          <a class="btn btn-pink"><i class="fas fa-clone left"></i> View Event</a>
+         </div>
+        </div>
+      </div>
+     </div>
+    <!-- Card -->
+  </div>
+ </div>
+</div>
+{% endblock %}
+

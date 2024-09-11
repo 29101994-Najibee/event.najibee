@@ -1,0 +1,147 @@
+{% extends "base_user_logged.html" %}
+{% block main %}
+
+<div class="row" style="padding:4rem 0rem 0rem 11rem; margin-top:2rem; ">
+    <div class="line"></div>
+    <div class="col-lg-6">
+        <div class="section-title">
+            <h2>Evenementen Reserveren</h2>
+            <p>Hier Kunt u je Evenement reserveren!</p>
+            {{ user.username }}
+        </div>
+    </div>
+</div>
+<div class="form-row mb-4">
+    <div class="card" style="width: 80vw; margin:10rem;">
+        <!--start header form image -->
+        <header>
+            <div class="text-center bg-image" style="
+            background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+            height: 400px;">
+                <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <div class="text-white">
+                            <h1 class="mb-3">Add Nieuw Evenement</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--Start section -->
+        <!--End header form image -->
+        <div class="card-body">
+            {{ errors | raw }}
+            <section class="form-1">
+                <!-- <div class="errors_form"></div> -->
+                <!-- start form evenementenregistratie -->
+                <form action="/action/ac_reservering.php?a=reservering" method="post">
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Volldige naam</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa-solid fa-person"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="Volledig_naam" id="Volledig_naam"
+                                    placeholder="{{ user.voornaam}} {{ user.achternaam}}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Evenement Start Datum</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="strat_datum"><i
+                                            class="fa-solid fa-calendar-check"></i></span>
+                                </div>
+                                <input type="date" class="form-control" name="start_datum" id="start_datum" value="{{ "
+                                    now"|date("Y-m-d") }}" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Evenement Eind Datum</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="datum"><i
+                                            class="fa-solid fa-calendar-xmark"></i></span>
+                                </div>
+                                <input type="date" class="form-control" name="eind_datum" id="eind_datum" value="{{ "
+                                    now"|date("Y-m-d") }}" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Evenement naam</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="evenement_naam"><i
+                                            class="fa-regular fa-handshake"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="evenement_naam" id="evenement_naam"
+                                    placeholder="Evenement naam">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Start tijd</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="start_tijd"><i
+                                            class="fa-regular fa-clock"></i></span>
+                                </div>
+                                <input type="time" class="form-control" name="start_tijd" id="start_tijd">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Eind tijd</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="eind_tijd"><i
+                                     class="fa-solid fa-clock"></i></span>
+                                </div>
+                                <input type="time" class="form-control" name="eind_tijd" id="eind_tijd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="FormControlBeschrijving">Evenement Beschrijving</label>
+                        <textarea class="form-control" name="beschrijving" id="exampleFormControlTextarea1" rows="3"
+                            placeholder="Enter your description here ...."></textarea>
+                    </div>
+                    <div class="form_group">
+                        <div class="card-body row ">
+                            <div class="col-sm-6 input-group-text bg-warning">
+                                <select name="spreker_id" class="form-select">
+                                    <option selected>Select een Spreker voor je
+                                        Events</option>
+                                    {% for presentatie in spreker %}
+                                    <option value="{{ presentatie.id }}" data-width="50%">
+                                        {{ presentatie.spreker_naam }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-6 input-group-text bg-warning">
+                                <select id="evenement_naam" name="evenement_id" class="form-select eventSelect" aria-label="Default select">
+                                    <option selected>Selecteer een Event</option>
+                                    {% for eventData in events %}
+                                    <option value="{{ eventData['id'] }}" >{{ eventData ['evenement_naam']}}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--------------------------------------------------------------------------- button submit----------------------------------------------------------------------- -->
+                    <div class="form-group" style="margin:3rem; ">
+                        <input type="submit" name="add_reservering" class="shadow btn btn-warning waves-effect float-end"
+                            style="text-decoration: none;" value="Event reserveren">
+                        </input>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,153 @@
+{% extends "base_admin.html" %}
+{% block main %} 
+<!-------------------------------------start Location dropdown -------------------------------------------->
+
+<div class="row" style="padding:4rem 0rem 0rem 11rem; margin-top:2rem; ">
+        <div class="line"></div>
+        <div class="col-lg-6">
+            <div class="section-title">
+                <h2>Zalen </h2>
+                <p>Voer de Zaal van de evnement hier.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-3 py-3 mx-auto " style="margin-bottom:3rem; ">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-sm-start">
+    
+                <div class="card mb-3">
+                    <header>
+                        <!-- Background image -->
+                        <div
+                          class="text-center bg-image"
+                          style="
+                            background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+                            height: 400px;">
+                          <div class="mask bg-image" style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                              <div class="text-white">
+                                <h1 class="mb-3">Zalen Form</h1>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
+                      </header>
+        
+                    <form action="/action/ac_zaal.php?a=create" method="post" class="mb-3 m-4">
+                        <!-- start Location form -->
+                        {{ errors | raw }}
+                        <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+                        <div class ="alert alert-danger" id="errorMessage" style="display: none;"></div>
+                            <div class="row ">
+                              <div class="col"> 
+                                <label>Enter de zaal naam</label>
+                              </div>
+                              <div class="col"> 
+                                <label>Select een locatie </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col input-group-text bg-warning">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-dungeon"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" name="zaal_naam"
+                                    id="zaal_naam" placeholder="Zaal...">
+                                   
+                                </div>
+                            </div>
+                            <div class="col input-group-text bg-warning">
+                              <select name="locatie_id" class="form-select" aria-label="Default select example">
+                                <option selected>Select een Locatie</option>
+                                {% for eventLocatie in locatie %}
+                                <option  value="{{ eventLocatie['id'] }}">{{ eventLocatie ['locatie_naam']}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                           </div>
+                     
+                        <div class="form-inline">
+                            <input type="submit" id="addZaalBtn" name="add_zaal" class="addZaalBtn shadow btn btn-success waves-effect "
+                             style="margin-top:2rem; text-decoration: none;" value="Save Zaal">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <!-------------------------- strat zaal loop card ------------------------------>
+<section>
+  <!-- ... (your existing section code) ... -->
+  <div class="col bg-light text-center p-5 ml-5" style="max-width:1800px; justify-content: center; align-items: center;">
+    <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+    <!-- body card -->
+    <div class="row" style="display:flex; align-items: center; margin-bottom: 20rem; ">
+      <div class="form-row">
+        <!-- Loop through each event data in the session -->
+       
+        {% for eventZaal in zaal %}
+          <div class="card" style="width: 32rem; margin:20px;">
+            <div class="card-body text-center">
+              <div class="card-block">
+                <h2><i class="fa-solid fa-dungeon text-warning fa-2x"></i></h2>
+              </div>
+              <h5 class="card-title">{{ eventZaal['zaal_naam'] }}</h5>
+            
+              <p class="card-text text-small">{{ eventZaal['locatie_naam'] }}</p>
+            
+              <div class="form-inline align-items-center justify-content-center">
+                  <input type="submit" data-id="{{ eventZaal['id'] }}" data-action="delete"
+                      class="deleteZaalBtn shadow btn btn-outline-danger waves-effect m-4"
+                      style="margin-top:2rem; text-decoration: none;" value="Delete">
+                  <!-- Button trigger modal -->
+                          
+                  <input type="submit" id="openModalBtn" data-id="{{ eventZaal['id'] }}" data-action="get" class="openModalBtn getZaalBtn shadow btn-warning btn waves-effect m-4"
+                  style="margin-top:2rem; text-decoration: none;" data-toggle="modal" data-target="#zaalModal" value="Update">
+
+                  <!-- Modal -->
+            </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- end body card -->
+
+    <!-- Modal -->
+<div id="myModal" class="modal" >
+  <div class="modal-content"style="width: 700px;">
+    {{ errors | raw }}
+    <p>Update Evenement zaal </p>
+    <div class="modal-header">
+        <h5 class="modal-title" id="zaalModalLabel">Evenementen zaal</h5>
+        
+    </div>
+    <div class="modal-body">
+        <div class="col">
+            <label>Evenement Zaal</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i
+                    class="fa-solid fa-list"></i></span>
+                </div>
+                <input type="text" class="form-control form-control-sm"
+                    name="zaal_naam" id="updateZaal_naam" 
+                    placeholder="Nieuw Zaal...">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="close" class="close" data-dismiss="modal">Close</button>
+        <input type="submit" data-dismiss="modal" name="update" data-action="update"
+            class="updateZaalBtn shadow btn-warning btn waves-effect m-4"
+            style="margin-top:2rem; text-decoration: none;" value="Save">
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+{%endblock%}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>user page</title>
+
+         <!-- bootstrap link  -->
+        <link rel="stylesheet" href="/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" >
+         <!-- style css link  -->
+         <link rel="stylesheet" href="/includes/style.css">
+         <!-- font awesome link -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+          <!-- font family  -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <!-- Container wrapper -->
+                <div class="container-fluid">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="https://najibee.evenementenregistratie/home">events.nl</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link" href="home.html">Events<span class="sr-only">(current)</span></a>
+                            <a class="nav-item nav-link" href="register.html">Locaties & zalen</a>
+                            <a class="nav-item nav-link" href="login.html">Reserveren</a>
+                            <a class="nav-item nav-link" href="contact.html">Contact</a>
+                        </div>
+                        <!-- Icons -->
+                        <ul class="navbar-nav ml-auto d-flex flex-row me-1">
+                            <li class="nav-item me-3 me-lg-0" style="margin:10px">
+                              
+                              <button type="button" onclick="location.href='../register'" class="shadow btn btn-warning waves-effect"><i class="fa-solid fa-cash-register"></i>&nbsp;registeren</button>
+                                <button type="button" onclick="location.href='../login'" class="shadow btn btn-warning waves-effect"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Inloggen </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+ 
+            
+<main style="min-height:100%; margin-bottom:20rem;">
+    {% block main %}{% endblock %}
+</main>
+<footer class="bg-body-tertiary text-center text-sm-start fixed-bottom">
+
+    <div class="container p-4">
+        <section class="mb-4">
+                <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+                  <i class="fab fa-facebook-f"></i></a>
+
+      <!-- Twitter -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+        <i class="fab fa-twitter"></i></a>
+
+      <!-- Google -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+        <i class="fab fa-google"></i></a>
+
+      <!-- Instagram -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+        <i class="fab fa-instagram"></i></a>
+
+      <!-- Linkedin -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+        <i class="fab fa-linkedin-in"></i></a>
+
+      <!-- Github -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button">
+        <i class="fab fa-github"></i></a>
+        </section>
+</div>
+<!-- Copyright -->
+<div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  © 2024 Copyright: NCA &nbsp;
+  <a class="text-white" href="https://najibee.evenementenregistratie/home">najibee.evenementenregistratie</a>
+</div>
+<!-- Copyright -->
+  
+</div>
+<!-- End of .container -->
+</footer>
+
+     <!--  link script -->
+     <script src="/includes/js/main.js"></script>
+     <script src="/includes/js/script.js"></script>
+    
+ 
+</body>
+</html>

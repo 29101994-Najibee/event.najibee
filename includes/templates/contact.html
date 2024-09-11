@@ -1,0 +1,110 @@
+{% extends "base_admin.html" %}
+{% block main %}
+
+<div class="row" style="padding:4rem 0rem 0rem 11rem; margin-top:2rem; ">
+  <div class="line"></div>
+  <div class="col-lg-6">
+    <div class="section-title">
+      <h2>Contact met Ons!
+      </h2>
+      <p>Hier Kunt u een message achterlaten of contact met ons!</p>
+    </div>
+  </div>
+</div>
+<div class="form-row mb-4 d-flex justify-content-center" >
+  <div class="card" style="width: 40vw; margin:10rem;">
+    <!--start header form image -->
+    <header>
+      <div class="text-center bg-image" style="
+            background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+            height: 400px;">
+        <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+              <h1 class="mb-3">Contact met ons</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--Start section -->
+    <!--End header form image -->
+    <div class="card-body">
+      {{ errors | raw }}
+      <section class="form-1">
+        <!-- <div class="errors_form"></div> -->
+        <!-- start form evenementenregistratie -->
+        <div class="container align-items-center" style="margin-top: 2rem;">
+                {{ errors | raw}}
+                <h2 class="tittle">contact Form</h2>
+                <form action="action/ac_contact.php?a=contact" method="post">
+                  <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                      <label>Voornaam</label>
+                      <input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label>Achternaam</label>
+                      <input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label>Telefoon</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="telefoon"><i class="fa-solid fa-phone"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="telefoon" id="telefoon" placeholder="telefoon">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col">
+                      <label>Email</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="email"><i class="fa-regular fa-envelope"></i></span>
+                        </div>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label>Username</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="username"><i class="fa-solid fa-user-secret"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                      </div>
+                    </div>
+                   
+                  </div>
+                  <div class="form-row">
+                      <div class="col">
+                        <label>Message</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="message"><i class="fa-solid fa-message" style="top:0;"></i></span>
+                          </div>
+                          <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:15px">
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-warning" name="verzenden">Verzenden</button>
+                      </div>
+                    </div>
+              
+                    <footer>Heb je nog geen account? <a href="register">Registeren</a></footer>
+              
+                </form>
+              </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

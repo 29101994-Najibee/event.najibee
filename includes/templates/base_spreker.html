@@ -1,0 +1,188 @@
+{% extends "base_spreker.html" %}
+
+{% block main%}
+<section style="background-color: #eee;">
+  <div class="container p-5">
+    <div class="row" style="margin-top: 7rem">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <p>Hi, Spereker<br>{{ session.user_username }}</p>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fa-solid fa-lg fa-cart-shopping"></i>
+                <p class="m-1 p-2">Alle Mijn Presentaties: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="badge badge-primary badge-pill">{{ aantal_presentatie.aantal_presentatie }}</span></p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fa-solid fa-sliders fa-lg"></i>
+                <p class="m-1 p-2">Mijn Overzicht:</p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fa-solid fa-folder-open fa-lg"></i>
+                <p class="m-1 p-2">Mijn folders:</p>
+              </li>
+              <li class="list-group-item d-flex align-items-center p-3">
+                <i class="fa-solid fa-comments fa-lg"></i>
+                <p class="m-1 p-2">Comments:</p>
+              </li>
+              <li class="list-group-item d-flex  align-items-center p-3">
+                <i class="fa-solid fa-inbox fa-lg"></i>
+                <p class="m-1 p-2">Mijn inbox:</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Volledige Naam</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.voornaam}}{{ user.achternaam}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Telefoon</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.telefoon}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Username</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.username}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 10rem;">
+          {% for presentatie in presentaties %}
+          <div class="col-md-6" style="margin-top: 1rem;">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4 font-italic me-1"><span class="text-primary font-italic me-1">Evenement</span>{{
+                  presentatie.evenement_naam }}</p>
+                <p class="card-text">Spreker: {{ presentatie.spreker_naam }}</p>
+                <p class="card-text">Starttijd: {{ presentatie.pr_start_tijd }}</p>
+                <p class="card-text">Eindtijd: {{ presentatie.pr_eind_tijd }}</p>
+                <p class="card-text">Beschrijving: {{ presentatie.pr_beschrijving }}</p>
+              </div>
+              <div class="form-group d-flex justify-content-center">
+                <button type="submit" data-id="{{ presentatie.id}}" data-action="get"
+                  class="openModalBtn getPresentatieBtn shadow btn btn-outline-warning btn waves-effect m-4"
+                  style="margin-top:2rem; text-decoration: none;" data-toggle="modal" data-target="#basicExampleModal">
+                  <i class="fas fa-pen-to-square"></i></button>
+
+                <button type="submit" data-id="{{ presentatie.id}}" data-action="delete"
+                  class="deletePresentatieBtn shadow btn btn-outline-danger waves-effect m-4"
+                  style="margin-top:2rem; text-decoration: none;"><i class="fa-regular fa-trash-can"></i></button>
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content" style="width: 700px;">
+        <p>Update Evenement Spreker </p>
+        <div class="alert alert-success" id="successMessage" style="display: none;"></div>
+        <div class="alert alert-danger" id="errorMessage" style="display: none;"></div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="EventModalLabel">Evenement persentatie</h5>
+
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col">
+              <label>Spreker naam</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa-solid fa-person"></i></span>
+                </div>
+                <input type="text" class="form-control" name="spreker_naam" id="updateSpreker_naam"
+                  placeholder="Voer je naam en achternaam" value="{{ user.voornaam}} {{ user.achternaam}}">
+              </div>
+            </div>
+            <div class="col">
+              <label>Slecteer een Event</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa-regular fa-handshake"></i></span>
+                </div>
+                <select id="updateEvenement_naam" name="evenement_id" class="form-select eventSelect"
+                  aria-label="Default select">
+                  <option selected>Selecteer een Event</option>
+                  {% for eventData in events %}
+                  <option value="{{ eventData['id']}}">{{ eventData['evenement_naam']}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label>Start tijd van je presentatie</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="pr_start_tijd"><i class="fa-regular fa-clock"></i></span>
+                </div>
+                <input type="time" class="form-control" name="pr_start_tijd" id="updateStart_tijd">
+              </div>
+            </div>
+            <div class="col">
+              <label>Eind tijd van je presentatie</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="pr_eind_tijd"><i class="fa-solid fa-clock"></i></span>
+                </div>
+                <input type="time" class="form-control" name="pr_eind_tijd" id="updateEind_tijd">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Presentatie Beschrijving</label>
+            <textarea class="form-control" name="pr_beschrijving" id="updateBeschrijving" rows="3"
+              placeholder="Enter your description here ...."></textarea>
+          </div>
+          <!--------------------------------------------------------------------------- button submit------------------------------------------------------------------------->
+          <div class="modal-footer">
+            <button type="button" id="close" class="close" data-dismiss="modal">Close</button>
+
+            <input type="submit" data-dismiss="modal" name="edit" data-action="edit"
+              class="updatePresentatieBtn shadow btn-warning btn waves-effect m-4"
+              style="margin-top:2rem; text-decoration: none;" value="Save">
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{%endblock%}

@@ -1,0 +1,41 @@
+{% extends "base_user.html" %}
+{%block main%}
+<div class="container align-items-center justify-content-center" style="margin-top: 15rem;">
+  {{ errors | raw }}
+  <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+  <div class ="alert alert-danger" id="errorMessage" style="display: none;"></div>
+  <h2 class="tittle">Login Form</h2>
+    <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+      <div>
+        <div class="form-group row">
+          <div class="col-md-4 mb-3">
+            <label >Username</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa-solid fa-user-secret"></i></span>
+              </div>
+              <input type="text" class="form-control" name="username" id="username" placeholder="Username"> 
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 mb-3">
+                <label >Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                  </div>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Password"> 
+              </div>
+            </div>
+        </div>
+        <div class="form-group row" style="margin-top:15px">
+          <div class="col-sm-10">
+            <button type="submit" data-action="login" value="{{ user.id}}" class="btnLogin btn btn-warning" name="login">Inloggen</button>
+          </div>
+        </div>
+        <footer>Heb je geen account? <a href="register">registreren</a></footer>
+      </div>
+</div>
+{%endblock%}
+

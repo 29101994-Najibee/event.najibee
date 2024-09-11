@@ -1,0 +1,127 @@
+{% extends "base_admin.html" %}
+{% block main %}
+<!-------------------------------------start Location dropdown -------------------------------------------->
+
+<div class="row" style="padding:4rem 0rem 0rem 11rem; margin-top:2rem; ">
+    <div class="line"></div>
+    <div class="col-lg-6">
+        <div class="section-title">
+            <h2>Categorieen </h2>
+            <p>Voer de Categorie van de evenement hier.</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid px-3 py-3 mx-auto " style="margin-bottom:3rem; ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-sm-start">
+
+            <div class="card mb-3">
+                <header>
+                    <!-- Background image -->
+                    <div
+                      class="text-center bg-image"
+                      style="
+                        background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+                        height: 400px;">
+                      <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                          <div class="text-white">
+                            <h1 class="mb-3">Categorie Form</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   
+                  </header>
+    
+                <div class="mb-3 m-4">
+                    <!-- start Location form -->
+                    {{ errors | raw }}
+                   <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+                   <div class ="alert alert-danger" id="errorMessage" style="display: none;"></div>
+                <form >
+                    <div class="col">
+                        <label>Categorie Naam</label>
+                        <div class="input-group form-inline">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" name="categorie_naam"
+                                id="categorie_naam" placeholder="Nieuw Categorie...">
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <button type="button" id="addCategorieBtn" class="addCategorieBtn shadow btn btn-success waves-effect"
+                        style="margin-top:2rem; text-decoration: none;" data-action="create">Save Categorie</button>
+                    
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section  style="margin-bottom: 15rem;">
+    <!-- ... (your existing section code) ... -->
+    <div class="col bg-light text-center p-5 ml-5" style="max-width:1800px; justify-content: center; align-items: center; overflow: visible;">
+      <!-- body card -->
+      <div class="row" style="display:flex; align-items: center;">
+        <div class="form-row ">
+         
+                {% for eventCategorie in categorie %}
+                <div class="card bg-light d-flex justify-content-center align-items-center p-2 m-2" style="width: 20rem;">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ eventCategorie['categorie_naam'] }}</h6>
+                        <div id="output"></div>
+                        <div class="form-inline align-items-center ">
+                            <input type="submit" data-id="{{ eventCategorie['id'] }}" data-action="delete"
+                                class="deleteCategorieBtn shadow btn btn-outline-danger waves-effect m-4"
+                                style="margin-top:2rem; text-decoration: none;" value="Delete">
+
+
+                            <!-- Button trigger modal -->
+                          
+                            <input type="submit" id="openModalBtn" data-id="{{ eventCategorie['id'] }}" data-action="get" class="openModalBtn getCategorieBtn shadow btn-warning btn waves-effect m-4"
+                            style="margin-top:2rem; text-decoration: none;" data-toggle="modal" data-target="#basicExampleModal"value="Update">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+   
+        <!-- Modal -->
+<div id="myModal" class="modal" >
+    <div class="modal-content"style="width: 700px;">
+      <p>Update Evenement Categorie </p>
+      <div class ="alert alert-success" id="successMessage" style="display: none;"></div>
+     <div class ="alert alert-danger" id="errorMessage" style="display: none;"></div>
+      <div class="modal-header">
+          <h5 class="modal-title" id="zaalModalLabel">Evenementen zaal</h5>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+            <label>Categorie Naam</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i
+                    class="fa-solid fa-list"></i></span>
+                </div>
+                <input type="text" class="form-control form-control-sm"
+                    name="categorie_naam" id="updateCategorie_naam" 
+                    placeholder="Nieuw Categorie...">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="close" class="close" data-dismiss="modal">Close</button>
+    
+        <input type="submit" data-dismiss="modal" name="update" data-action="update"
+            class="updateCategorieBtn shadow btn-warning btn waves-effect m-4"
+            style="margin-top:2rem; text-decoration: none;" value="Save">
+    </div>
+    </div>
+  </div>
+  </div>
+  </section>
+{% endblock %}

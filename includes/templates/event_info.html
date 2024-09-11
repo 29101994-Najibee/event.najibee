@@ -1,0 +1,119 @@
+{% extends "base_user.html" %}
+{% block main %}
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col bg-light text-center p-5" style="max-width:1300px; justify-content: center; align-items: center;">
+        <div class="row">
+          <div class="col-8 col-sm-6 text-sm-start bg-warning">
+            <div class="col bg-warning p-5">
+      
+              <form action="/action/ac_reservering.php?a=checkReseveren" method="post">
+              {% if event is not empty %}
+                  <h4 class="success">{{ event['evenement_naam'] }}</h4>
+                  <div class="horizontal-line" style="width: 500px ;height: 4px; background-color: rgb(253, 253, 253); margin:2rem -2.7rem;"></div>
+                  <p><small>{{event['beschrijving'] }}</small></p>
+                  <div class="row">
+                    <div class="col-auto me-auto">
+                      <i class="fa-solid fa-list"></i>
+                      </div>
+                      <div class="col-auto me-auto">
+                     <h6>Event Categorie:</h6>
+                    </div>
+                    <div class="col">
+                      {% for categorie in event.categories %}
+                      <p><small>{{ categorie['categorie_naam'] }}</small></p>
+                      {% endfor %}
+                     
+                     </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-auto me-auto">
+                      <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <div class="col-auto me-auto">
+                     <h6>Locatie:</h6>
+                    </div>
+                    <div class="col">
+                      <p class="list-inline-item"><small>{{ event.locaties.straat }}&nbsp;{{ event.locaties.huisnummer }}{{ event.locaties.toevoeging }},{{ event.locaties.postcode }},{{ event.locaties.locatie_naam }}</small></p>
+                    </div>
+                  </div>
+                
+                <div class="row">
+                  <div class="col-auto me-auto">
+                    <i class="fa-solid fa-dungeon"></i>
+                    </div>
+                    <div class="col-auto me-auto">
+                   <h6>Zaal:</h6>
+                  </div>
+                  <div class="col">
+                    {% for zaal in event.zalen %}
+                    <p><small>{{ zaal.zaal_naam}}</small></p>
+                    {% endfor %}
+                   </div>
+                </div>
+               </div>
+        
+        <div class="col bg-light p-4 ">
+          <div class="row">
+            <div class="col">
+              <i class="fa-regular fa-clock"></i>
+              </div>
+              <div class="col" style="margin-left: -25rem;">
+             <h6>Datum & Tijd</h6>
+            </div>
+          </div>
+          <div class="horizontal-line" style="width: 100% ;height: 2px; background-color: rgb(39, 38, 38); "></div>
+          <div class="row">
+          <div class="d-flex flex-row" >
+              <div class="p-2"><span class="text-sm-start">Datum Evenement:</span><p class="text-small"><small>{{ event['datum'] }}</small></p></div>
+              <div class="p-2"><span class="text-sm-start">Start Evenement:</span><p class="text-small"><small>{{ event['start_tijd'] }}</small></p></div>
+              <div class="p-2"><span class="text-sm-start">Eind Evenement:</span><p class="text-small"><small>{{ event['eind_tijd'] }}</small></p></div>
+          </div>
+          <div class="d-flex flex-row">
+            <input class="shadow btn btn-outline-success waves-effect float-end m-4" type="button" value="Deelnemen">
+            <input type="submit" data-action="checkReseveren" name="wilReserveren" data-id="{{ event['id'] }}" class="checkReserveringBtn shadow btn btn-success waves-effect float-end m-4" value="Reservering"/>
+            </div>
+         </div>
+        
+</form>
+        
+         {% else %}
+             <p>geen evenement gevonden.</p>
+         {% endif %}
+        
+     </div>
+           
+          </div>
+          <div class="col-8 col-sm-6">
+            <img src="/images/event2.jpg" style="width:600px; margin-bottom: 1rem;">
+            <img src="/images/event3.jpg" style="width:600px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container pt-4">
+  <div class="row">
+    <div class="col bg-light p-5">
+      <!-- Card -->
+      <div class="card card-image"
+       style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.webp);">
+       <div class="mask bg-image " style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%;">
+       <!-- Content -->
+         <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+         <div>
+         <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
+         <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
+          optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
+          Odit sed qui, dolorum!.</p>
+          <a class="btn btn-pink"><i class="fas fa-clone left"></i> View Event</a>
+         </div>
+        </div>
+      </div>
+     </div>
+    <!-- Card -->
+  </div>
+ </div>
+</div>
+{% endblock %}
